@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\temperature-console-app\\temperature-console-app.csproj": {}
+    "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\tempconsoleappAndtesting\\temperature-console-app\\temperature-console-app.csproj": {}
   },
   "projects": {
-    "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\temperature-console-app\\temperature-console-app.csproj": {
+    "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\tempconsoleappAndtesting\\temperature-console-app\\temperature-console-app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\temperature-console-app\\temperature-console-app.csproj",
+        "projectUniqueName": "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\tempconsoleappAndtesting\\temperature-console-app\\temperature-console-app.csproj",
         "projectName": "temperature-console-app",
-        "projectPath": "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\temperature-console-app\\temperature-console-app.csproj",
+        "projectPath": "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\tempconsoleappAndtesting\\temperature-console-app\\temperature-console-app.csproj",
         "packagesPath": "C:\\Users\\young\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\temperature-console-app\\obj\\",
+        "outputPath": "C:\\Users\\young\\OneDrive\\Documents\\BICT\\SoftwareProcess\\D202SP-Indiv-Project-3\\tempconsoleappAndtesting\\temperature-console-app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\young\\AppData\\Roaming\\NuGet\\NuGet.Config"
