@@ -98,6 +98,24 @@ namespace TemperatureSensor.Services
             Console.WriteLine($"Sensor '{_sensor.Name}' has been shut down and reset.");
         }
 
+        public void RestartSensor()
+        {
+            if (_sensor == null)
+            {
+                Console.WriteLine("Sensor is not initialized.");
+                _logger.Log("Attempted to restart a non-initialized sensor.");
+                return;
+            }
+
+            // Clear historical data
+            _sensor.DataHistory.Clear();
+
+            // Log and confirm restart
+            _logger.Log($"Sensor '{_sensor.Name}' restarted. Data history cleared.");
+            Console.WriteLine($"Sensor '{_sensor.Name}' has been restarted.");
+        }
+
+
 
         public void StoreData(double sensorData)
         {
