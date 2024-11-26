@@ -102,11 +102,21 @@ namespace TemperatureSensor.Services
             for (int i = 0; i < 10; i++) // Simulate 10 readings
             {
                 double reading = SimulateData();
-                ValidateData(reading);
+                if (ValidateData(reading))
+                {
+                    StoreData(reading);
+
+                    // Apply smoothing after storing at least 3 readings
+                    if (_sensor.DataHistory.Count >= 3)
+                    {
+                        SmoothData(); // Default window size of 3
+                    }
+                }
             }
 
             _logger.Log("Sensor simulation completed.");
         }
+
 
 
 
