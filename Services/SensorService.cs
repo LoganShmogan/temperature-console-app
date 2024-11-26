@@ -43,6 +43,19 @@ namespace TemperatureSensor.Services
             return random.NextDouble() * (_sensor.MaxValue - _sensor.MinValue) + _sensor.MinValue + noise;
         }
 
+        public void StoreData(double sensorData)
+        {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
+            // Add the validated reading to the sensor's history
+            _sensor.DataHistory.Add(sensorData);
+
+            // Log the storage action
+            _logger.Log($"Data stored: {sensorData:F2}°C");
+        }
+
+
         public void StartSensor()
         {
             Console.WriteLine("Starting sensor simulation...");
