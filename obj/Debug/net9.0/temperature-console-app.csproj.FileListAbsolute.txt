@@ -12,3 +12,4 @@ C:\Users\young\OneDrive\Documents\BICT\SoftwareProcess\D202SP-Indiv-Project-3\te
 C:\Users\young\OneDrive\Documents\BICT\SoftwareProcess\D202SP-Indiv-Project-3\temperature-console-app\obj\Debug\net9.0\temperature-console-app.pdb
 C:\Users\young\OneDrive\Documents\BICT\SoftwareProcess\D202SP-Indiv-Project-3\temperature-console-app\obj\Debug\net9.0\temperature-console-app.genruntimeconfig.cache
 C:\Users\young\OneDrive\Documents\BICT\SoftwareProcess\D202SP-Indiv-Project-3\temperature-console-app\obj\Debug\net9.0\ref\temperature-console-app.dll
+C:\Users\young\OneDrive\Documents\BICT\SoftwareProcess\D202SP-Indiv-Project-3\temperature-console-app\obj\Debug\net9.0\temperature-console-app.sourcelink.json

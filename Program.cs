@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using TemperatureSensor.Services;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var sensorService = new SensorService();
+        sensorService.InitialiseSensor("DataCenterSensor", "Room 1", 22, 24);
+    }
+}
