@@ -5,6 +5,7 @@ namespace TemperatureSensor.Services
 {
     public class SensorService
     {
+        private readonly Logger _logger;
 
 
         public bool ValidateData(double sensorData)
@@ -12,13 +13,24 @@ namespace TemperatureSensor.Services
             if (_sensor == null)
                 throw new InvalidOperationException("Sensor is not initialized.");
 
-            // Check if the data is within the valid range
-            return sensorData >= _sensor.MinValue && sensorData <= _sensor.MaxValue;
+            bool isValid = sensorData >= _sensor.MinValue && sensorData <= _sensor.MaxValue;
+
+            if (isValid)
+                _logger.Log($"Valid data: {sensorData:F2}°C");
+            else
+                _logger.Log($"Invalid data detected: {sensorData:F2}°C");
+
+            return isValid;
         }
+
 
         private Sensor? _sensor;
 
-        public SensorService() { }
+        public SensorService(string logFilePath)
+        {
+            _logger = new Logger(logFilePath);
+        }
+
 
         // Simulates temperature data within the sensor's range
         public double SimulateData()
@@ -34,25 +46,24 @@ namespace TemperatureSensor.Services
         public void StartSensor()
         {
             Console.WriteLine("Starting sensor simulation...");
+            _logger.Log("Sensor simulation started.");
+
             for (int i = 0; i < 10; i++) // Simulate 10 readings
             {
                 double reading = SimulateData();
-                if (ValidateData(reading))
-                {
-                    Console.WriteLine($"Valid Reading: {reading:F2}°C");
-                }
-                else
-                {
-                    Console.WriteLine($"Invalid Reading Detected: {reading:F2}°C (Out of Range)");
-                }
+                ValidateData(reading);
             }
+
+            _logger.Log("Sensor simulation completed.");
         }
+
 
 
         public void InitialiseSensor(string name, string location, double minValue, double maxValue)
         {
             _sensor = new Sensor(name, location, minValue, maxValue);
-            Console.WriteLine($"Sensor '{name}' initialized at location '{location}' with range [{minValue}°C - {maxValue}°C].");
+            _logger.Log($"Sensor '{name}' initialized at location '{location}' with range [{minValue}°C - {maxValue}°C].");
         }
+
     }
 }
