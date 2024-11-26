@@ -81,6 +81,66 @@ namespace TemperatureSensor.Services
             return random.NextDouble() * (_sensor.MaxValue - _sensor.MinValue) + _sensor.MinValue + noise;
         }
 
+        public void ShutdownSensor()
+        {
+            if (_sensor == null)
+            {
+                Console.WriteLine("Sensor is not initialized.");
+                _logger.Log("Attempted to shut down a non-initialized sensor.");
+                return;
+            }
+
+            // Clear data history
+            _sensor.DataHistory.Clear();
+
+            // Log the shutdown event
+            _logger.Log($"Sensor '{_sensor.Name}' shut down. Data history cleared.");
+            Console.WriteLine($"Sensor '{_sensor.Name}' has been shut down and reset.");
+        }
+
+        public void ShutdownSensorWithConfirmation()
+        {
+            if (_sensor == null)
+            {
+                Console.WriteLine("Sensor is not initialized.");
+                _logger.Log("Attempted to shut down a non-initialized sensor.");
+                return;
+            }
+
+            Console.Write("Are you sure you want to shut down the sensor? (yes/no): ");
+            string response = Console.ReadLine();
+
+            if (response?.Trim().ToLower() == "yes")
+            {
+                ShutdownSensor(); // Call the existing shutdown method
+            }
+            else
+            {
+                Console.WriteLine("Shutdown aborted.");
+                _logger.Log("Shutdown aborted by user.");
+            }
+        }
+
+
+        public void RestartSensor()
+        {
+            if (_sensor == null)
+            {
+                Console.WriteLine("Sensor is not initialized.");
+                _logger.Log("Attempted to restart a non-initialized sensor.");
+                return;
+            }
+
+            // Clear historical data
+            _sensor.DataHistory.Clear();
+
+            // Log and confirm restart
+            _logger.Log($"Sensor '{_sensor.Name}' restarted. Data history cleared.");
+            Console.WriteLine($"Sensor '{_sensor.Name}' has been restarted.");
+        }
+
+
+
         public void StoreData(double sensorData)
         {
             if (_sensor == null)
@@ -120,25 +180,48 @@ namespace TemperatureSensor.Services
             return isAnomaly;
         }
 
+        private bool _isRunning;
+
         public void StartSensor()
         {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
             Console.WriteLine("Starting sensor simulation...");
             _logger.Log("Sensor simulation started.");
 
-            for (int i = 0; i < 10; i++) // Simulate 10 readings
+            _isRunning = true;
+
+            while (_isRunning)
             {
                 double reading = SimulateData();
                 if (ValidateData(reading))
                 {
                     StoreData(reading);
 
-                    // Apply anomaly detection
+                    // Apply anomaly detection (optional)
                     DetectAnomaly(reading);
+
+                    // Apply data smoothing
+                    if (_sensor.DataHistory.Count >= 3)
+                    {
+                        SmoothData();
+                    }
                 }
+
+                // Simulate a delay between readings
+                Thread.Sleep(1000);
             }
 
-            _logger.Log("Sensor simulation completed.");
+            _logger.Log("Sensor simulation stopped.");
+            Console.WriteLine("Sensor simulation stopped.");
         }
+
+        public void StopSensor()
+        {
+            _isRunning = false;
+        }
+
 
 
 
