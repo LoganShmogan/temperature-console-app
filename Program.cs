@@ -33,8 +33,7 @@ class Program
         // Start temperature simulation
         sensorService.StartSensor();
 
-        // Shutdown the sensor
-        sensorService.ShutdownSensor();
+        // sensorService.ShutdownSensor();
 
         // Restart the sensor after shutdown
         sensorService.RestartSensor();
