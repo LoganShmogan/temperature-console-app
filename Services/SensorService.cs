@@ -5,6 +5,17 @@ namespace TemperatureSensor.Services
 {
     public class SensorService
     {
+
+
+        public bool ValidateData(double sensorData)
+        {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
+            // Check if the data is within the valid range
+            return sensorData >= _sensor.MinValue && sensorData <= _sensor.MaxValue;
+        }
+
         private Sensor? _sensor;
 
         public SensorService() { }
@@ -20,16 +31,23 @@ namespace TemperatureSensor.Services
             return random.NextDouble() * (_sensor.MaxValue - _sensor.MinValue) + _sensor.MinValue + noise;
         }
 
-        // Call this to start simulation (later extend for multiple iterations)
         public void StartSensor()
         {
             Console.WriteLine("Starting sensor simulation...");
             for (int i = 0; i < 10; i++) // Simulate 10 readings
             {
                 double reading = SimulateData();
-                Console.WriteLine($"Simulated Reading: {reading:F2}°C");
+                if (ValidateData(reading))
+                {
+                    Console.WriteLine($"Valid Reading: {reading:F2}°C");
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid Reading Detected: {reading:F2}°C (Out of Range)");
+                }
             }
         }
+
 
         public void InitialiseSensor(string name, string location, double minValue, double maxValue)
         {
