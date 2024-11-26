@@ -229,8 +229,6 @@ namespace TemperatureSensor.Services
         }
 
 
-
-
         public void InitialiseSensor(string name, string location, double minValue, double maxValue)
         {
             _sensor = new Sensor(name, location, minValue, maxValue);
