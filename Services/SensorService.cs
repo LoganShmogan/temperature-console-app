@@ -16,12 +16,18 @@ namespace TemperatureSensor.Services
             bool isValid = sensorData >= _sensor.MinValue && sensorData <= _sensor.MaxValue;
 
             if (isValid)
+            {
                 _logger.Log($"Valid data: {sensorData:F2}°C");
+                StoreData(sensorData); // Store valid data
+            }
             else
+            {
                 _logger.Log($"Invalid data detected: {sensorData:F2}°C");
+            }
 
             return isValid;
         }
+
 
 
         private Sensor? _sensor;
