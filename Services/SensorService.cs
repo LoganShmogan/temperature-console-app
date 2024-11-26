@@ -40,6 +40,27 @@ namespace TemperatureSensor.Services
             }
         }
 
+        public double SmoothData(int windowSize = 3)
+        {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
+            if (_sensor.DataHistory.Count < windowSize)
+                throw new InvalidOperationException($"Not enough data to apply smoothing. Need at least {windowSize} readings.");
+
+            // Get the most recent values for the window
+            var recentValues = _sensor.DataHistory
+                .Skip(Math.Max(0, _sensor.DataHistory.Count - windowSize))
+                .Take(windowSize);
+
+            // Calculate the moving average
+            double smoothedValue = recentValues.Average();
+            _logger.Log($"Smoothed data: {smoothedValue:F2}°C (using last {windowSize} readings)");
+
+            return smoothedValue;
+        }
+
+
 
         private Sensor? _sensor;
 
