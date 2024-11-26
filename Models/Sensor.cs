@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TemperatureSensor.Models
+namespace TemperatureSensor.Services
 {
     public class Sensor
     {

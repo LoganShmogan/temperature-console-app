@@ -1,5 +1,5 @@
 using System;
-using TemperatureSensor.Models;
+using TemperatureSensor.Services;
 
 namespace TemperatureSensor.Services
 {
@@ -63,6 +63,12 @@ namespace TemperatureSensor.Services
 
 
         private Sensor? _sensor;
+
+        public Sensor? GetSensor()
+        {
+            return _sensor;
+        }
+
 
         public SensorService(string logFilePath)
         {
