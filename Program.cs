@@ -16,7 +16,7 @@ class Program
         // Start temperature simulation
         sensorService.StartSensor();
 
-        // Display stored data history
-        sensorService.DisplayDataHistory();
+        // Shutdown the sensor
+        sensorService.ShutdownSensor();
     }
 }
