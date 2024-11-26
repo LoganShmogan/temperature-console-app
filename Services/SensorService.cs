@@ -5,6 +5,17 @@ namespace TemperatureSensor.Services
 {
     public class SensorService
     {
+
+
+        public bool ValidateData(double sensorData)
+        {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
+            // Check if the data is within the valid range
+            return sensorData >= _sensor.MinValue && sensorData <= _sensor.MaxValue;
+        }
+
         private Sensor? _sensor;
 
         public SensorService() { }
