@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("temperature-console-app")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+144a2645d1c8f626c2a96997ae71f88dbf34afb1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10cc9ac38af42e12aeca7b3fa21d9a56a1aeb520")]
 [assembly: System.Reflection.AssemblyProductAttribute("temperature-console-app")]
 [assembly: System.Reflection.AssemblyTitleAttribute("temperature-console-app")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
