@@ -180,25 +180,48 @@ namespace TemperatureSensor.Services
             return isAnomaly;
         }
 
+        private bool _isRunning;
+
         public void StartSensor()
         {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
             Console.WriteLine("Starting sensor simulation...");
             _logger.Log("Sensor simulation started.");
 
-            for (int i = 0; i < 10; i++) // Simulate 10 readings
+            _isRunning = true;
+
+            while (_isRunning)
             {
                 double reading = SimulateData();
                 if (ValidateData(reading))
                 {
                     StoreData(reading);
 
-                    // Apply anomaly detection
+                    // Apply anomaly detection (optional)
                     DetectAnomaly(reading);
+
+                    // Apply data smoothing
+                    if (_sensor.DataHistory.Count >= 3)
+                    {
+                        SmoothData();
+                    }
                 }
+
+                // Simulate a delay between readings
+                Thread.Sleep(1000);
             }
 
-            _logger.Log("Sensor simulation completed.");
+            _logger.Log("Sensor simulation stopped.");
+            Console.WriteLine("Sensor simulation stopped.");
         }
+
+        public void StopSensor()
+        {
+            _isRunning = false;
+        }
+
 
 
 
