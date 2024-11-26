@@ -28,6 +28,17 @@ namespace TemperatureSensor.Services
             return isValid;
         }
 
+        public void DisplayDataHistory()
+        {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
+            Console.WriteLine($"Data history for sensor '{_sensor.Name}':");
+            foreach (var reading in _sensor.DataHistory)
+            {
+                Console.WriteLine($"- {reading:F2}°C");
+            }
+        }
 
 
         private Sensor? _sensor;
