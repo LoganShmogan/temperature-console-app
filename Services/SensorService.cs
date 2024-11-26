@@ -16,11 +16,28 @@ namespace TemperatureSensor.Services
             bool isValid = sensorData >= _sensor.MinValue && sensorData <= _sensor.MaxValue;
 
             if (isValid)
+            {
                 _logger.Log($"Valid data: {sensorData:F2}°C");
+                StoreData(sensorData); // Store valid data
+            }
             else
+            {
                 _logger.Log($"Invalid data detected: {sensorData:F2}°C");
+            }
 
             return isValid;
+        }
+
+        public void DisplayDataHistory()
+        {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
+            Console.WriteLine($"Data history for sensor '{_sensor.Name}':");
+            foreach (var reading in _sensor.DataHistory)
+            {
+                Console.WriteLine($"- {reading:F2}°C");
+            }
         }
 
 
@@ -42,6 +59,19 @@ namespace TemperatureSensor.Services
             double noise = random.NextDouble() * 0.5 - 0.25; // Noise between -0.25 and 0.25
             return random.NextDouble() * (_sensor.MaxValue - _sensor.MinValue) + _sensor.MinValue + noise;
         }
+
+        public void StoreData(double sensorData)
+        {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
+            // Add the validated reading to the sensor's history
+            _sensor.DataHistory.Add(sensorData);
+
+            // Log the storage action
+            _logger.Log($"Data stored: {sensorData:F2}°C");
+        }
+
 
         public void StartSensor()
         {

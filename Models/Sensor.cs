@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace TemperatureSensor.Models
 {
     public class Sensor
@@ -6,6 +8,7 @@ namespace TemperatureSensor.Models
         public string Location { get; set; }
         public double MinValue { get; set; }
         public double MaxValue { get; set; }
+        public List<double> DataHistory { get; set; }
 
         public Sensor(string name, string location, double minValue, double maxValue)
         {
@@ -13,6 +16,7 @@ namespace TemperatureSensor.Models
             Location = location;
             MinValue = minValue;
             MaxValue = maxValue;
+            DataHistory = new List<double>();
         }
     }
 }
