@@ -118,6 +118,33 @@ namespace TemperatureSensor.Services
         }
 
 
+        public bool DetectAnomaly(double sensorData, double threshold = 1.0)
+        {
+            if (_sensor == null)
+                throw new InvalidOperationException("Sensor is not initialized.");
+
+            if (_sensor.DataHistory.Count < 3)
+            {
+                _logger.Log("Not enough data for anomaly detection. Defaulting to no anomaly.");
+                return false; // Not enough data to calculate an average
+            }
+
+            // Calculate the moving average (last 3 readings)
+            var recentValues = _sensor.DataHistory
+                .Skip(Math.Max(0, _sensor.DataHistory.Count - 3))
+                .Take(3);
+            double average = recentValues.Average();
+
+            // Detect if the current reading deviates significantly
+            bool isAnomaly = Math.Abs(sensorData - average) > threshold;
+            if (isAnomaly)
+            {
+                _logger.Log($"Anomaly detected: {sensorData:F2}°C (deviation from average: {Math.Abs(sensorData - average):F2})");
+            }
+            return isAnomaly;
+        }
+
+
 
 
         public void InitialiseSensor(string name, string location, double minValue, double maxValue)
