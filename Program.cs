@@ -18,5 +18,12 @@ class Program
 
         // Shutdown the sensor
         sensorService.ShutdownSensor();
+
+        // Restart the sensor after shutdown
+        sensorService.RestartSensor();
+
+        sensorService.ShutdownSensorWithConfirmation();
+
+
     }
 }

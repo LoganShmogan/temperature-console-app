@@ -98,6 +98,30 @@ namespace TemperatureSensor.Services
             Console.WriteLine($"Sensor '{_sensor.Name}' has been shut down and reset.");
         }
 
+        public void ShutdownSensorWithConfirmation()
+        {
+            if (_sensor == null)
+            {
+                Console.WriteLine("Sensor is not initialized.");
+                _logger.Log("Attempted to shut down a non-initialized sensor.");
+                return;
+            }
+
+            Console.Write("Are you sure you want to shut down the sensor? (yes/no): ");
+            string response = Console.ReadLine();
+
+            if (response?.Trim().ToLower() == "yes")
+            {
+                ShutdownSensor(); // Call the existing shutdown method
+            }
+            else
+            {
+                Console.WriteLine("Shutdown aborted.");
+                _logger.Log("Shutdown aborted by user.");
+            }
+        }
+
+
         public void RestartSensor()
         {
             if (_sensor == null)
