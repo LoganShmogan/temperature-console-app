@@ -94,30 +94,6 @@ namespace TemperatureSensor.Services
         }
 
 
-        public void StartSensor()
-        {
-            Console.WriteLine("Starting sensor simulation...");
-            _logger.Log("Sensor simulation started.");
-
-            for (int i = 0; i < 10; i++) // Simulate 10 readings
-            {
-                double reading = SimulateData();
-                if (ValidateData(reading))
-                {
-                    StoreData(reading);
-
-                    // Apply smoothing after storing at least 3 readings
-                    if (_sensor.DataHistory.Count >= 3)
-                    {
-                        SmoothData(); // Default window size of 3
-                    }
-                }
-            }
-
-            _logger.Log("Sensor simulation completed.");
-        }
-
-
         public bool DetectAnomaly(double sensorData, double threshold = 1.0)
         {
             if (_sensor == null)
@@ -144,6 +120,25 @@ namespace TemperatureSensor.Services
             return isAnomaly;
         }
 
+        public void StartSensor()
+        {
+            Console.WriteLine("Starting sensor simulation...");
+            _logger.Log("Sensor simulation started.");
+
+            for (int i = 0; i < 10; i++) // Simulate 10 readings
+            {
+                double reading = SimulateData();
+                if (ValidateData(reading))
+                {
+                    StoreData(reading);
+
+                    // Apply anomaly detection
+                    DetectAnomaly(reading);
+                }
+            }
+
+            _logger.Log("Sensor simulation completed.");
+        }
 
 
 
