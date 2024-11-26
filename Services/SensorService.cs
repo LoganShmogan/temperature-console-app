@@ -81,6 +81,24 @@ namespace TemperatureSensor.Services
             return random.NextDouble() * (_sensor.MaxValue - _sensor.MinValue) + _sensor.MinValue + noise;
         }
 
+        public void ShutdownSensor()
+        {
+            if (_sensor == null)
+            {
+                Console.WriteLine("Sensor is not initialized.");
+                _logger.Log("Attempted to shut down a non-initialized sensor.");
+                return;
+            }
+
+            // Clear data history
+            _sensor.DataHistory.Clear();
+
+            // Log the shutdown event
+            _logger.Log($"Sensor '{_sensor.Name}' shut down. Data history cleared.");
+            Console.WriteLine($"Sensor '{_sensor.Name}' has been shut down and reset.");
+        }
+
+
         public void StoreData(double sensorData)
         {
             if (_sensor == null)
